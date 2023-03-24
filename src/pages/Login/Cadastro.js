@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { Botao, Texto, Caixa, Form, Input } from "./LoginStyle"
 import { useNavigate } from "react-router-dom"
-import { UserContext } from "../../contexts/UserContext"
+import  UserContext  from "../../contexts/UserContext"
 import apiAuth from "../../services/apiAuth"
 
 

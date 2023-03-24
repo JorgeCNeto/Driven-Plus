@@ -134,3 +134,58 @@ export const Form = styled.form`
     flex-direction: column;
     align-items: center;
 `
+
+export const Confirmacao = styled.div`
+    width: 248px;
+    height: 210px;
+    left: 64px;
+    top: 229px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    position: fixed;
+    z-index: 2;
+    display: none; //$((props) => props.assinar ? flex : none) 
+    flex-direction: column;
+    align-items: center;
+`
+
+export const BotaoNao = styled.button`
+    width: 95px;
+    height: 52px;
+    background: #CECECE;
+    border-radius: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    margin-right: 14px;
+`
+
+export const BotaoSim = styled.button`
+    width: 95px;
+    height: 52px;
+    background: #FF4791;
+    border-radius: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+`
+
+export const ConfirmacaoTexto = styled.h1`
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;    
+    text-align: center;
+    color: #000000;   
+`
+
+export const AjusteConfirmacaoTexto = styled.div`
+    margin-top: 33px;
+    margin-bottom: 47px;
+`

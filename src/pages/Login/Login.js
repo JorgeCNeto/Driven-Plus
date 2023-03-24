@@ -3,24 +3,36 @@ import logo from "../../assets/logo.png"
 import { Botao, Texto, Icones, Imagem, Form, Input } from "./LoginStyle"
 import apiAuth from "../../services/apiAuth"
 import { useContext, useState } from "react"
+import UserContext from "../../contexts/UserContext"
+
  
 export default function Login(){
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    // const {user, setUser} = useContext(UserContext)
+    const [senha, setSenha] = useState("")
+    const { setUser} = useContext(UserContext)
     const navigate = useNavigate()
     
     function handleLogin(e){
         e.preventDefault()
+
+        const logar = {email, password: senha}
         
-        apiAuth.login(form)
+        apiAuth.login(logar)
         .then(res => {
             console.log(res.data)
+
+            const {id, name, token, cpf, email} = res.data
+            setUser({id, name, cpf, token, email})
             
-            navigate("/subscriptions")
+            if (res.data.membership === null){
+                 navigate("/subscriptions")
+            } else {
+                navigate("/home")
+            }
+           
         })
         .catch(err => {
-            console.log(err.response.data)
+            console.log(err.response)
         })
 
         
@@ -41,8 +53,8 @@ export default function Login(){
                     placeholder="Senha" 
                     type="password" 
                     required
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    value={senha}
+                    onChange={e => setSenha(e.target.value)}
                     />
                 <Botao type="submit">ENTRAR</Botao>
             </Form>
