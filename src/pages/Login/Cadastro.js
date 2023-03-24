@@ -6,23 +6,24 @@ import apiAuth from "../../services/apiAuth"
 
 
 export default function Cadastro(){
-    const [form, setForm] = useState({ name: "", cpf: "", email: "", password: "" })
+    const [email, setEmail] = useState("")
+    const [senha, setSenha] = useState("")
+    const [nome, setNome] = useState("")
+    const [cpf, setCpf] = useState("")
     const {setUser} = useContext(UserContext)
     const navigate = useNavigate()
-
-    function handleForm(e){
-        setForm({...Form, [e.target.name]: e.target.value })
-    }
     
     function handleSignUp(e){
         e.preventDefault()
+        
+        const cadastro = {email, name: nome, cpf, password: senha}
 
-        apiAuth.signUp(form)
+        apiAuth.signUp(cadastro)
         .then(res => {
             navigate("/")
         })
         .catch(err => {
-            console.log(err.response.data.message)
+            alert(err.response.data.message)
         })
             
         
@@ -34,34 +35,30 @@ export default function Cadastro(){
                 <Input 
                     placeholder="Nome" 
                     type="text"
-                    required 
-                    name="name"
-                    value={form.name} 
-                    onChange={handleForm}
+                    required                     
+                    value={nome} 
+                    onChange={e => setNome(e.target.value)}
                     />
                 <Input 
                     placeholder="CPF" 
                     type="text"
-                    required 
-                    name="cpf"
-                    value={form.cpf} 
-                    onChange={handleForm}
+                    required                     
+                    value={cpf} 
+                    onChange={e => setCpf(e.target.value)}
                     />
                 <Input 
                     placeholder="E-mail" 
                     type="email" 
-                    required 
-                    name="email"
-                    value={form.email} 
-                    onChange={handleForm}
+                    required                    
+                    value={email} 
+                    onChange={e => setEmail(e.target.value)}
                     />
                 <Input 
                     placeholder="Senha" 
                     type="password"
-                    required 
-                    name="password"
-                    value={form.password} 
-                    onChange={handleForm}
+                    required                     
+                    value={senha} 
+                    onChange={e => setSenha(e.target.value)}
                     />
                 <Botao type="submit">CADASTRAR</Botao>
             </Form>

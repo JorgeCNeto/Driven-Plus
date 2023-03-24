@@ -13,7 +13,7 @@ export default function App() {
   
   return (
     <BrowserRouter>
-      {/* <UserContext.provider value={{user, setUser }}> */}
+      <UserContext.Provider value={{user, setUser }}>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/sign-up" element={<Cadastro />} />
@@ -24,7 +24,7 @@ export default function App() {
           {/* <Route path="/users/ID_DO_PLANO/update" element={} /> */}
         
         </Routes>
-      {/* </UserContext.provider> */}
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }

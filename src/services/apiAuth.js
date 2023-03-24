@@ -8,7 +8,9 @@ function login(body) {
 }
 
 function signUp(body){
+    //console.log(body)
     const promise = axios.post(`${BASE_URL}/sign-up`, body)
+    
     return promise
 }
 

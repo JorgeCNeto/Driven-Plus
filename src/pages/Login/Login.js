@@ -5,15 +5,11 @@ import apiAuth from "../../services/apiAuth"
 import { useContext, useState } from "react"
  
 export default function Login(){
-    const [form, setForm] = useState({ email: "", password: "" })
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     // const {user, setUser} = useContext(UserContext)
     const navigate = useNavigate()
     
-    function handleForm(e){
-        setForm({...Form, [e.target.name]: e.target.value })
-        
-    }
-
     function handleLogin(e){
         e.preventDefault()
         
@@ -38,17 +34,15 @@ export default function Login(){
                     placeholder="E-mail" 
                     type="email" 
                     required
-                    name="email"
-                    value={form.email}
-                    onChange={handleForm}
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                     />
                 <Input 
                     placeholder="Senha" 
                     type="password" 
                     required
-                    name="password"
-                    value={form.password}
-                    onChange={handleForm}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                     />
                 <Botao type="submit">ENTRAR</Botao>
             </Form>
