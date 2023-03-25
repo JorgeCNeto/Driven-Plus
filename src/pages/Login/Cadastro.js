@@ -1,7 +1,6 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { Botao, Texto, Caixa, Form, Input } from "./LoginStyle"
 import { useNavigate } from "react-router-dom"
-import  UserContext  from "../../contexts/UserContext"
 import apiAuth from "../../services/apiAuth"
 
 
@@ -9,8 +8,7 @@ export default function Cadastro(){
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const [nome, setNome] = useState("")
-    const [cpf, setCpf] = useState("")
-    const {setUser} = useContext(UserContext)
+    const [cpf, setCpf] = useState("")    
     const navigate = useNavigate()
     
     function handleSignUp(e){
