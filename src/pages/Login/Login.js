@@ -19,11 +19,26 @@ export default function Login(){
         
         apiAuth.login(logar)
         .then(res => {
-            console.log(res.data)
-
+                       
+            let localStorageContent = localStorage
             const {id, name, token, cpf, email} = res.data
-            setUser({id, name, cpf, token, email})
+
+            if(!Array.isArray(localStorageContent)){
+                localStorageContent = [localStorageContent]
+            }
+
+            localStorageContent.forEach(item => {
+                if(item.token === token){
+                    navigate("/home")
+                    return 
+                } else {
+                    localStorage.setItem("token", token)
+                }
+            });
             
+
+            setUser({id, name, cpf, token, email})
+          
             if (res.data.membership === null){
                  navigate("/subscriptions")
             } else {
@@ -32,7 +47,7 @@ export default function Login(){
            
         })
         .catch(err => {
-            console.log(err.response)
+            alert(err.response.data.message)
         })
 
         

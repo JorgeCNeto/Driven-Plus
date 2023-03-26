@@ -109,6 +109,7 @@ export const InputSmall = styled.input`
 export const AjusteInput = styled.div`
     display: flex;
     margin-bottom: 12px;
+    padding-left: 10px;
 `
 
 export const Botao = styled.div`

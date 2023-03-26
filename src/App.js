@@ -13,7 +13,7 @@ export default function App() {
 
   const[user, setUser] = useState({})
   const[plano, setPlano] = useState({})
-  console.log("User" , user)
+  console.log("User" , user.token)
   return (
     <BrowserRouter>
       <UserContext.Provider value={{user, setUser } }>

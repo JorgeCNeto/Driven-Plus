@@ -1,23 +1,26 @@
 import { Titulo, Pagina } from "./InscricaoStyle"
 import Planos from "./Planos"
 import apiSubscriptions from "../../services/apiSubscriptions"
-import axios from "axios"
 import PlanosContext from "../../contexts/PlanosContext";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import UserContext from "../../contexts/UserContext";
 
 export default function Inscricao(){
-    const[planos, setPlanos] = useState(/*{id, image, price}*/)
+    const[planos, setPlanos] = useState([]/*{id, image, price}*/)
+    const { user } = useContext(UserContext)
+ 
+    useEffect(mostrarPlanos, [])
     
-    // const promise = axios.get("https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships")
-    // promise.then((res) =>{
-    //     console.log(res.data)
-
-    //     const {id, imagem, price} = res.data
-    //         setPlanos({id, imagem, price})
-    // })
-    // promise.catch((err) => {
-    //     console.log(err.response)
-    // })
+    function mostrarPlanos(){
+        apiSubscriptions.listarPlanos(user.token)
+        .then(res => {
+            console.data(res.data)
+            setPlanos(res.data)           
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
+    }
    
     return(
         <Pagina>
@@ -25,9 +28,14 @@ export default function Inscricao(){
                 <Titulo>Escolha seu Plano</Titulo>
             </div>
             <PlanosContext.Provider value={{planos, setPlanos}}>
-                <Planos />
-                <Planos />
-                <Planos />
+                { planos.map(p =>(
+                    <Planos 
+                    key={p.id}
+                    image={p.image}
+                    price={p.price}
+                    />
+                ))}
+               
             </PlanosContext.Provider>
         </Pagina>
     )

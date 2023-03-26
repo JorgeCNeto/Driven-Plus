@@ -1,12 +1,11 @@
 import {Plano, Imagem, Valor} from "./InscricaoStyle"
-import logo from "../../assets/logoPagina.png"
 
-export default function Planos(){
+export default function Planos({image, price}){
         
     return(
         <Plano>
-                <Imagem src={logo}/>
-                <Valor>R$ 39,99</Valor>
+                <Imagem src={image}/>
+                <Valor>R$ ${price}</Valor>
         </Plano>
     )
 }

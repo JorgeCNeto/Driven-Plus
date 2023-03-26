@@ -2,12 +2,14 @@ import logoPagina from "../../assets/logoPagina.png"
 import {FaArrowLeft, FaMoneyBillWave} from "react-icons/fa"
 import { TbCheckupList } from "react-icons/tb";
 import {Seta, Texto, Imagem, TopicoLista, AjusteBeneficios, AjustePreco, AjusteLogos, Valor, Beneficios, Preco, Form, InputLarge, AjusteInput, InputSmall, Botao, Confirmacao, BotaoNao, BotaoSim, ConfirmacaoTexto, AjusteConfirmacaoTexto} from "./IdDoPlanoStyle"
-import { useState } from "react";
+import { useContext, useState } from "react";
+import PlanoContext from "../../contexts/PlanoContext";
 
 
 
 export default function IdDoPlano(){
     const [assinar, setAssinar] = useState(false)
+    const {plano} = useContext(PlanoContext)
     
     function fecharPlano(){
         setAssinar(true)
