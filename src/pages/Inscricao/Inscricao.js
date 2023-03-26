@@ -6,15 +6,18 @@ import PlanosContext from "../../contexts/PlanosContext";
 import { useState } from "react";
 
 export default function Inscricao(){
-    const[planos, setPlanos] = useState({id, image, price})
+    const[planos, setPlanos] = useState(/*{id, image, price}*/)
     
-    const promise = axios.get("https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships")
-    promise.then((res) =>{
-        console.log(res.data)
-    })
-    promise.catch((err) => {
-        console.log(err.response)
-    })
+    // const promise = axios.get("https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships")
+    // promise.then((res) =>{
+    //     console.log(res.data)
+
+    //     const {id, imagem, price} = res.data
+    //         setPlanos({id, imagem, price})
+    // })
+    // promise.catch((err) => {
+    //     console.log(err.response)
+    // })
    
     return(
         <Pagina>
@@ -22,7 +25,7 @@ export default function Inscricao(){
                 <Titulo>Escolha seu Plano</Titulo>
             </div>
             <PlanosContext.Provider value={{planos, setPlanos}}>
-                <Planos id={id} image={image} price={price}/>
+                <Planos />
                 <Planos />
                 <Planos />
             </PlanosContext.Provider>

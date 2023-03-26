@@ -2,10 +2,17 @@ import logoPagina from "../../assets/logoPagina.png"
 import {FaArrowLeft, FaMoneyBillWave} from "react-icons/fa"
 import { TbCheckupList } from "react-icons/tb";
 import {Seta, Texto, Imagem, TopicoLista, AjusteBeneficios, AjustePreco, AjusteLogos, Valor, Beneficios, Preco, Form, InputLarge, AjusteInput, InputSmall, Botao, Confirmacao, BotaoNao, BotaoSim, ConfirmacaoTexto, AjusteConfirmacaoTexto} from "./IdDoPlanoStyle"
+import { useState } from "react";
 
 
 
 export default function IdDoPlano(){
+    const [assinar, setAssinar] = useState(false)
+    
+    function fecharPlano(){
+        setAssinar(true)
+    }
+
     return(
         <div>
             <div>
@@ -53,7 +60,7 @@ export default function IdDoPlano(){
                             placeholder="Validade"
                             />
                     </AjusteInput>
-                    <Botao>ASSINAR</Botao>
+                    <Botao onClick={fecharPlano}>ASSINAR</Botao>
                 </Form>
             </div>
             <Confirmacao>
