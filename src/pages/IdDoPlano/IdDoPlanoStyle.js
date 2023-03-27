@@ -60,6 +60,15 @@ export const Valor = styled.p`
     color: #FFFFFF;
 `
 
+export const Lista = styled.li`
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+`
+
 export const Beneficios = styled.div`
     margin-left: 44px;
     margin-bottom: 12px;

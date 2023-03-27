@@ -35,8 +35,8 @@ function alterarPlano(body){
     return promise
 }
 
-function deletarPlano(){
-
+function deletarPlano(token){
+    const promise = axios.delete(BASE_URL, createConfig(token))
 }
 
 const apiSubscriptions = {listarPlanos, listarPlano, assinarPlano, alterarPlano, deletarPlano}

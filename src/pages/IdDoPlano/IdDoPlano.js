@@ -1,7 +1,7 @@
 import logoPagina from "../../assets/logoPagina.png"
 import {FaArrowLeft, FaMoneyBillWave} from "react-icons/fa"
 import { TbCheckupList } from "react-icons/tb";
-import {Seta, Texto, Imagem, TopicoLista, AjusteBeneficios, AjustePreco, AjusteLogos, Valor, Beneficios, Preco, Form, InputLarge, AjusteInput, InputSmall, Botao, BotaoNao, BotaoSim, ConfirmacaoTexto, AjusteConfirmacaoTexto, BotoesOverlay} from "./IdDoPlanoStyle"
+import {Seta, Texto, Imagem, TopicoLista, AjusteBeneficios, AjustePreco, AjusteLogos, Valor, Beneficios, Preco, Form, InputLarge, AjusteInput, InputSmall, Botao, BotaoNao, BotaoSim, ConfirmacaoTexto, AjusteConfirmacaoTexto, BotoesOverlay, Lista} from "./IdDoPlanoStyle"
 import { useContext, useEffect, useState } from "react";
 import PlanoContext from "../../contexts/PlanoContext";
 import apiSubscriptions from "../../services/apiSubscriptions";
@@ -77,10 +77,9 @@ export default function IdDoPlano(){
                         <TbCheckupList size="20px" color="#ffffff"/>
                         <TopicoLista>Benefícios:</TopicoLista>
                     </AjusteBeneficios>
-                    {descricaoPlanos ? <ol>{descricaoPlanos.perks.map(d => (<li><Valor>{d.title}</Valor></li>))}</ol> : null}                  
+                    {descricaoPlanos ? <ol>{descricaoPlanos.perks.map(d => (<li><Lista>{d.title}</Lista></li>))}</ol> : null}                  
                 </Beneficios>
                 
-
                 <Preco>
                     <AjustePreco>
                         <FaMoneyBillWave size="20px" color="#ffffff"/>

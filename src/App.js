@@ -15,9 +15,9 @@ export default function App() {
   const[user, setUser] = useState({})
   const[plano, setPlano] = useState({})
   const[descricaoPlanos, setDescricaoPlanos] = useState({})
-  //console.log("User" , user.token)
-  //console.log(plano, "plano")
-  console.log(descricaoPlanos)
+  console.log("User" , user)
+  console.log(plano, "plano")
+  console.log(descricaoPlanos, "descrição")
   return (
     <BrowserRouter>
       <UserContext.Provider value={{user, setUser } }>
