@@ -21,6 +21,7 @@ export default function Login(){
         .then(res => {
                        
             let localStorageContent = localStorage
+            //console.log(res.data)
             const {id, name, token, cpf, email} = res.data
 
             if(!Array.isArray(localStorageContent)){

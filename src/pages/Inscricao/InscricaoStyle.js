@@ -38,9 +38,9 @@ export const Plano = styled.div`
 `
 
 export const Pagina = styled.div`
-    width: max;
     height: max;    
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: auto;
 `

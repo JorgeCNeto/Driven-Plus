@@ -11,6 +11,7 @@ function createConfig(token){
 }
 
 function listarPlanos(token) {
+    //console.log(token)
     const promise = axios.get(`${BASE_URL}/memberships`, createConfig(token))      
     return promise
 }

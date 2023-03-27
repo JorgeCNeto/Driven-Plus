@@ -4,22 +4,33 @@ import apiSubscriptions from "../../services/apiSubscriptions"
 import PlanosContext from "../../contexts/PlanosContext";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import PlanoContext from "../../contexts/PlanoContext";
 
 export default function Inscricao(){
     const[planos, setPlanos] = useState([]/*{id, image, price}*/)
     const { user } = useContext(UserContext)
- 
+    const { setPlano, plano } = useContext(PlanoContext)
+    const navigate = useNavigate()
+    
     useEffect(mostrarPlanos, [])
     
     function mostrarPlanos(){
+        
         apiSubscriptions.listarPlanos(user.token)
         .then(res => {
-            console.data(res.data)
-            setPlanos(res.data)           
+            const planosRenderizados = res.data
+            console.log(planosRenderizados)
+            setPlanos(planosRenderizados)           
         })
         .catch(err => {
             console.log(err.response)
         })
+    }
+
+    function planoSelecionado(p){
+        setPlano(p)
+        navigate("/subscriptions/ID_DO_PLANO")
     }
    
     return(
@@ -33,6 +44,7 @@ export default function Inscricao(){
                     key={p.id}
                     image={p.image}
                     price={p.price}
+                    planoSelecionado={() => planoSelecionado(p)}
                     />
                 ))}
                
