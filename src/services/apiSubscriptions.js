@@ -16,15 +16,14 @@ function listarPlanos(token) {
     return promise
 }
 
-function listarPlano(token){    
-    const promise = axios.get(`${BASE_URL}/memberships/ID_DO_PLANO`)
-    
+function listarPlano(token, idPlano){    
+    const promise = axios.get(`${BASE_URL}/memberships/${idPlano}`, createConfig(token))    
     return promise
 }
 
-function assinarPlano(body){
+function assinarPlano(body, token){
     console.log(body, "body cadastro")
-    const promise = axios.post(BASE_URL, body)
+    const promise = axios.post(BASE_URL, body, createConfig(token))
     
     return promise
 }

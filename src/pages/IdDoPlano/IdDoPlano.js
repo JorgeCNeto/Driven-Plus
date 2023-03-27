@@ -1,20 +1,65 @@
 import logoPagina from "../../assets/logoPagina.png"
 import {FaArrowLeft, FaMoneyBillWave} from "react-icons/fa"
 import { TbCheckupList } from "react-icons/tb";
-import {Seta, Texto, Imagem, TopicoLista, AjusteBeneficios, AjustePreco, AjusteLogos, Valor, Beneficios, Preco, Form, InputLarge, AjusteInput, InputSmall, Botao, Confirmacao, BotaoNao, BotaoSim, ConfirmacaoTexto, AjusteConfirmacaoTexto} from "./IdDoPlanoStyle"
-import { useContext, useState } from "react";
+import {Seta, Texto, Imagem, TopicoLista, AjusteBeneficios, AjustePreco, AjusteLogos, Valor, Beneficios, Preco, Form, InputLarge, AjusteInput, InputSmall, Botao, BotaoNao, BotaoSim, ConfirmacaoTexto, AjusteConfirmacaoTexto, BotoesOverlay} from "./IdDoPlanoStyle"
+import { useContext, useEffect, useState } from "react";
 import PlanoContext from "../../contexts/PlanoContext";
-
+import apiSubscriptions from "../../services/apiSubscriptions";
+import styled from "styled-components";
+import UserContext from "../../contexts/UserContext";
+import DescricaoPlanosContext from "../../contexts/DescricaoPlanosContext";
+import { useNavigate } from "react-router-dom"
 
 
 export default function IdDoPlano(){
+    const [cardName, setCardName] = useState("")
+    const [cardNumber, setCardNumber] = useState("")
+    const [securityNumber, setsecurityNumber] = useState("")
+    const [expirationDate, setExpirationDate] = useState("")    
+    const navigate = useNavigate()
     const [assinar, setAssinar] = useState(false)
-    const {plano} = useContext(PlanoContext)
+    const { user } = useContext(UserContext)
+    const { plano } = useContext(PlanoContext)
+    const { descricaoPlanos, setDescricaoPlanos } = useContext(DescricaoPlanosContext)
+    const idPlano = plano.id
     
-    function fecharPlano(){
-        setAssinar(true)
+    function confirmarPlano(){
+        setAssinar(true)        
     }
 
+    function cancelar(){
+        setAssinar(false)
+    }
+
+    useEffect(descricaoPlano, [])
+    
+    function descricaoPlano(){
+        
+        apiSubscriptions.listarPlano(user.token, idPlano)
+        .then(res => {     
+            setDescricaoPlanos(res.data)            
+        })
+        .catch(err => {
+            console.log(err.response.data)
+        })
+    }
+
+    function fecharPlano(e){
+        e.preventDefault()
+        
+        const body = {membershipId: idPlano, cardName, cardNumber, securityNumber, expirationDate}
+
+        apiSubscriptions.assinarPlano(body, user.token)
+        .then(res => {
+            console.log(res.data)
+            navigate("/home")
+        })
+        .catch(err => {
+            alert(err.response.data.message)
+        })            
+        
+    }
+    
     return(
         <div>
             <div>
@@ -32,10 +77,7 @@ export default function IdDoPlano(){
                         <TbCheckupList size="20px" color="#ffffff"/>
                         <TopicoLista>Benefícios:</TopicoLista>
                     </AjusteBeneficios>
-                    <ol >
-                        <li><Valor>Brindes exclusivos</Valor></li>
-                        <li><Valor>Materiais bônus de web</Valor></li>
-                    </ol>
+                    {descricaoPlanos ? <ol>{descricaoPlanos.perks.map(d => (<li><Valor>{d.title}</Valor></li>))}</ol> : null}                  
                 </Beneficios>
                 
 
@@ -44,37 +86,68 @@ export default function IdDoPlano(){
                         <FaMoneyBillWave size="20px" color="#ffffff"/>
                         <TopicoLista>Preço:</TopicoLista>
                     </AjustePreco>
-                    <Valor>R$ 39,99 cobrados mensalmente</Valor>
+                    <Valor>R$ {plano.price} cobrados mensalmente</Valor>
                 </Preco>
                 
                 <Form>
                     <InputLarge 
                         placeholder="Nome impresso no cartão"
+                        type="text"
+                        required                     
+                        value={cardName} 
+                        onChange={e => setCardName(e.target.value)}
                         />
                     <InputLarge 
                         placeholder="Digitos do cartão"
+                        type="text"
+                        required                     
+                        value={cardNumber} 
+                        onChange={e => setCardNumber(e.target.value)}
                         />
                     <AjusteInput>
                         <InputSmall 
                             placeholder="Código de segurança"
+                            type="number"
+                            required                     
+                            value={securityNumber} 
+                            onChange={e => setsecurityNumber(e.target.value)}
                             />
                         <InputSmall 
                             placeholder="Validade"
+                            type="text"
+                            required                     
+                            value={expirationDate} 
+                            onChange={e => setExpirationDate(e.target.value)}
                             />
                     </AjusteInput>
-                    <Botao onClick={fecharPlano}>ASSINAR</Botao>
+                    <Botao onClick={confirmarPlano} assinar={assinar}>ASSINAR</Botao>
                 </Form>
             </div>
-            <Confirmacao>
+            <Confirmacao assinar={assinar}>
                 <AjusteConfirmacaoTexto>
                     <ConfirmacaoTexto>Tem certeza que deseja assinar o plano</ConfirmacaoTexto>
-                    <ConfirmacaoTexto>Driven Plus (R$ 39,99)?</ConfirmacaoTexto>
+                    <ConfirmacaoTexto>{descricaoPlanos.name} (R$ {descricaoPlanos.price})?</ConfirmacaoTexto>
                 </AjusteConfirmacaoTexto>
-                <div>
-                    <BotaoNao>Não</BotaoNao>
-                    <BotaoSim>SIM</BotaoSim>
-                </div>
+                <BotoesOverlay>
+                    <BotaoNao onClick={cancelar} assinar={assinar}>Não</BotaoNao>
+                    <BotaoSim onClick={fecharPlano}>SIM</BotaoSim>
+                </BotoesOverlay>
             </Confirmacao>
         </div>
     )
 }
+
+const Confirmacao = styled.div`
+    width: 248px;
+    height: 210px;
+    left: 64px;
+    top: 229px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    position: fixed;
+    z-index: 2;
+    display: ${(props) => props.assinar ? "flex" : "none"};
+    flex-direction: column;
+    align-items: center;
+`
+

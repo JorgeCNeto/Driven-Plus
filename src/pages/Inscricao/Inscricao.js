@@ -20,7 +20,7 @@ export default function Inscricao(){
         apiSubscriptions.listarPlanos(user.token)
         .then(res => {
             const planosRenderizados = res.data
-            console.log(planosRenderizados)
+            //console.log(planosRenderizados)
             setPlanos(planosRenderizados)           
         })
         .catch(err => {

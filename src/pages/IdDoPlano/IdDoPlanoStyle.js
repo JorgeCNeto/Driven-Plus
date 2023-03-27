@@ -136,19 +136,7 @@ export const Form = styled.form`
     align-items: center;
 `
 
-export const Confirmacao = styled.div`
-    width: 248px;
-    height: 210px;
-    left: 64px;
-    top: 229px;
-    background: #FFFFFF;
-    border-radius: 12px;
-    position: fixed;
-    z-index: 2;
-    display: none; //$((props) => props.assinar ? flex : none) 
-    flex-direction: column;
-    align-items: center;
-`
+
 
 export const BotaoNao = styled.button`
     width: 95px;
@@ -189,4 +177,9 @@ export const ConfirmacaoTexto = styled.h1`
 export const AjusteConfirmacaoTexto = styled.div`
     margin-top: 33px;
     margin-bottom: 47px;
+`
+
+export const BotoesOverlay = styled.div`
+display: flex;
+justify-content: center;
 `
