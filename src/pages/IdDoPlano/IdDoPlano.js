@@ -68,7 +68,7 @@ export default function IdDoPlano(){
                 </Seta>
 
                 <AjusteLogos>
-                    <Imagem src={logoPagina}/>
+                    <Imagem src={plano.image}/>
                     <Texto>Driven Plus</Texto>
                 </AjusteLogos>
 
