@@ -22,7 +22,7 @@ export default function IdDoPlano(){
     const { plano } = useContext(PlanoContext)
     const { descricaoPlanos, setDescricaoPlanos } = useContext(DescricaoPlanosContext)
     const idPlano = plano.id
-    
+      
     function confirmarPlano(){
         setAssinar(true)        
     }
@@ -43,7 +43,7 @@ export default function IdDoPlano(){
             console.log(err.response.data)
         })
     }
-
+    
     function fecharPlano(e){
         e.preventDefault()
         
@@ -77,7 +77,13 @@ export default function IdDoPlano(){
                         <TbCheckupList size="20px" color="#ffffff"/>
                         <TopicoLista>Benefícios:</TopicoLista>
                     </AjusteBeneficios>
-                    {descricaoPlanos ? <ol>{descricaoPlanos.perks.map(d => (<li><Lista>{d.title}</Lista></li>))}</ol> : null}                  
+                    
+                    <ol>
+                        {(descricaoPlanos.perks.length > 0) ? descricaoPlanos.perks.map((d, index) => (
+                            <Lista>{index+1}. {d.title}</Lista>
+                        )) : console.log("deu ruim")}
+                    </ol>
+
                 </Beneficios>
                 
                 <Preco>

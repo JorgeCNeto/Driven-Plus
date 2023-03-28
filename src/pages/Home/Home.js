@@ -32,10 +32,10 @@ export default function Home(){
             </CaixaTopo>
             <Titulo>Olá, {user.name}</Titulo>
             <AjusteBeneficio>
-              {/*   {descricaoPlanos ? {descricaoPlanos.perks.map(d => (<Botao>{d.title}</Botao>))} : null} */}
+            {(descricaoPlanos.perks.length > 0) ? descricaoPlanos.perks.map((d) => (
+                            <Botao>{d.title}</Botao>
+                        )) : console.log("deu ruim")}
 
-                <Botao>Solicitar brindes</Botao>
-                <Botao>Materiais bônus de web</Botao>
             </AjusteBeneficio>
             <AjusteConfirmacao>
                 <Link to="/subscriptions">

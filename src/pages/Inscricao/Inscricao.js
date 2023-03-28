@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import PlanoContext from "../../contexts/PlanoContext";
 
 export default function Inscricao(){
-    const[planos, setPlanos] = useState([]/*{id, image, price}*/)
+    const[planos, setPlanos] = useState([])
     const { user } = useContext(UserContext)
     const { setPlano, plano } = useContext(PlanoContext)
     const navigate = useNavigate()
